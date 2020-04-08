@@ -1,0 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: Sébastien Gardoll copyright all rights reserved %
+% email: sebastien@gardoll.fr                             %
+% LaTeX Project Public License 1.3c                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{format} % Configure the version of document: WEB or PAPER.
+
+\include{functions}
+
+% Define a directory of resources (containing the pictures, etc.).
+\graphicspath{{.}{resources/}}
+
+% Add annotations in the pdf file.
+\hypersetup
+{
+bookmarksopen=true,
+pdftitle="pdf title",
+pdfauthor="author name",
+pdfsubject="subject of the document",
+%pdftoolbar=false,
+pdfmenubar=true,
+pdfhighlight=/O,
+colorlinks=true,
+pdfpagemode=None,
+pdfpagelayout=SinglePage,
+pdffitwindow=true,
+%linkcolor=linkcol,
+%citecolor=citecol,
+%urlcolor=linkcol
+}
+
+\title{Report Template}
+\author{Sébastien Gardoll}
+
+% Base file for bibliographic references.
+\addbibresource{xampl.bib}
+
+\begin{document}
+
+\include{title_page}
+
+\frontmatter % Set page numbering to roman style until \mainmatter is met.
+\pagestyle{footer_style}
+
+\tableofcontents*
+
+\mainmatter % Set page numbering to arabic style.
+\pagestyle{report_style}
+
+\include{report}
+
+\appendix % Set chapter numbering to alphabetic style.
+\include{annex_page}
+
+% Include your appendix pages right here.
+
+\backmatter
+\pagestyle{footer_style}
+
+\printbibliography[heading=bibintoc]
+%\clearpage
+\listoffigures
+%\clearpage
+\listoftables
+
+\end{document}

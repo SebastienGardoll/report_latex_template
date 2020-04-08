@@ -1,0 +1,220 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: Sébastien Gardoll copyright all rights reserved %
+% email: sebastien@gardoll.fr                             %
+% LaTeX Project Public License 1.3c                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% option draft - debug mode - (faster compilation time).
+% option oneside: for web publication.
+% option twoside: for paper publication.
+% option openright: the chapters begin at the right.
+% option final : printer grade.
+% option showtrims : with trim marks.
+
+%%% EXAMPLE OF WEB PUBLICATION %%%
+%\documentclass[french,a4paper,12pt,article,oneside,onecolumn,openany,extrafontsizes,final]{memoir}
+
+%%% EXAMPLE OF PAPER PUBLICATION %%%
+\documentclass[french,a4paper,12pt,article,twoside,onecolumn,openright,extrafontsizes,final]{memoir}
+
+% See section hyperlink to continue with WEB or PAPER settings.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FONTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% XeLateX/ LuaLateX font selection package.
+\usepackage{fontspec}
+
+% Document font.
+\setmainfont{Liberation Serif}
+
+% Localisation.
+% french referes to frenchb ; frenchb and francais are deprecated.
+% babel fully supportes LuaLateX ; polyglossia doesn't fully support LuaLateX.
+\usepackage[french]{babel}
+
+% None breakable spaces for the french quote symboles.
+\frenchbsetup{og=«, fg=»}
+
+% Micro-typographical adjustments.
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MATHS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Maths symboles.
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{unicode-math} % needed for \setmathfont
+
+% Use this font instead of the default font (latin modern) for math.
+\setmathfont{Libertinus Math}
+\theoremstyle{plain}
+\newtheorem{theo}{Théorème}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Additional length to the spin margin.
+% Instruction after stock and trim size and
+% before margin definitions.
+\setbinding{0mm}
+
+% Define the spine and edge margins.
+% Margins are always adujsted (see checkandfixthelayout algorithm and log).
+%                     spin  edge
+\setlrmarginsandblock{25mm}{25mm}{*}
+
+% Define the upper and lower margins.
+% Margins are always adujsted (see checkandfixthelayout algorithm and log).
+%                      up   down
+\setulmarginsandblock{25mm}{25mm}{*}
+
+% Set the distance between the edge of the page and the header (head drop).
+\setheaderspaces{8mm}{*}{*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PARAGRAPH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Title numbering. e.g. give a number up to the level of subsection.
+\setsecnumdepth{subsection}
+
+% Paragraph indentation.
+\setlength{\parindent}{1em}
+
+% Manage the widows and orphans by streching the space between lines of the
+% faulty paragraph. Warning, this instruction can lead to greater or lower
+% paragraph spacing. Call \nowidow[n] at the end of the faulty paragraph,
+% with n as the minimal number of lines.
+\usepackage{nowidow}
+
+% Let memoir document class decides spacing between paragraphs.
+%\nonzeroparskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FIGURES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Make \section to be a barrier for the floating objects:
+% sections define scope for the placement of floating objects.
+\usepackage[section]{placeins}
+
+% Sideways of figures & tables.
+\usepackage{verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Define colors.
+\usepackage{color}
+%\definecolor{mygray}{gray}{0} % 0 for black ; 1 for white.
+%\definecolor{linkcol}{rgb}{0,0,0.4}
+%\definecolor{citecol}{rgb}{0.5,0,0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HYPERLINK %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Hyper reference configuration %%%
+
+%%% WEB VERSION %%%
+\usepackage[colorlinks = true, allcolors = blue]{hyperref}
+
+%%% PAPER VERSION %%%
+%\usepackage[colorlinks = true, allcolors = black]{hyperref}
+
+\urlstyle{rm} % Remove the URL special font and use the document font.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[backend=biber,style=numeric]{biblatex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Tables on several pages - page anotations.
+%\RequirePackage{supertabular}
+\RequirePackage{longtable}
+
+% Ctable style.
+\usepackage{ctable}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LISTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Cancel french setup for list and enable english style for list (bullet list).
+\frenchbsetup{StandardLists=true}
+
+% Enable list fine tuning.
+\usepackage{enumitem}
+
+% list configuration keys:
+% - leftmargin : bullet margin
+% - labelsep   : space after bullet
+% - itemsep    : item vertical spacing
+%\setlist[itemize]{leftmargin=12pt, labelsep=3pt, itemsep=0pt}
+%\setlist[enumerate]{leftmargin=16pt, labelsep=3pt, itemsep=0pt}
+\setlist{nosep} % Delete the vectical spacing.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLE SPACING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Space before:
+%\setbeforesecskip{0mm} % Section
+%\setbeforesubsecskip{0mm} % SubSection
+%\setbeforesubsubsecskip{0mm} % SubSubSection
+
+% Space after:
+%\setaftersecskip{0mm} % Section
+%\setaftersubsecskip{0mm} % SubSection
+%\setaftersubsubsecskip{0mm} % SubSubSection
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% OTHERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Logos, text superscript, subscript
+% and importation of glyph from other fonts.
+\ifluatex
+  \usepackage{luatextra}
+  \newcommand{\engineLogo}{\LuaLaTeX}
+\fi
+
+\ifxetex
+  \usepackage{xltxtra}
+  \newcommand{\engineLogo}{\XeLaTeX}
+\fi
+
+% Dummy text package.
+\usepackage{lipsum}
+
+% Arithemics with latex.
+\usepackage{calc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HEADER - FOOTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Page title customisation.
+\usepackage{titlesec}
+
+% Page style for the report.
+\nouppercaseheads
+\createmark{section}{left}{nonumber}{}{}
+\makepagestyle{report_style}
+\makeheadrule{report_style}{\textwidth}{\normalrulethickness}
+\makeatletter
+\if@twoside
+  \makeevenhead{report_style}{\textit\theauthor}{}{}
+  \makeoddhead{report_style}{}{}{\textit\leftmark}
+  \makeevenfoot{report_style}{\thepage}{}{}
+  \makeoddfoot{report_style}{}{}{\thepage}
+\else
+  \makeoddhead{report_style}{}{\textit\leftmark}{}
+  \makeoddfoot{report_style}{}{\thepage}{}
+\fi
+\makeatother
+
+% Page style for content lists (TOC, list of figures/tables).
+\makepagestyle{footer_style}
+\makeatletter
+\if@twoside
+  \makeevenfoot{footer_style}{\thepage}{}{}
+  \makeoddfoot{footer_style}{}{}{\thepage}
+\else
+  \makeoddfoot{footer_style}{}{\thepage}{}
+\fi
+\makeatother
+% Use of plain style is hard coded in the commands tableofcontents, listoffigures and listoftables. So overwrite the plain style.
+\copypagestyle{plain}{footer_style}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Layout validation.
+\settypeoutlayoutunit{mm} % Ouput the layout lenghts in milimeters.
+\checkandfixthelayout[classic]
